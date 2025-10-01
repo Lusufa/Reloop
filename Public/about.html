@@ -7,6 +7,39 @@
   <title>About Reloop</title>
   <link rel="stylesheet" href="about.css" />
   <link rel="stylesheet" href="style.css">
+  <style>
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+        position: absolute;
+        top: 4rem;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        flex-direction: column;
+        z-index: 100;
+      }
+      .nav.open {
+        display: flex;
+      }
+      .menu-button {
+        display: block;
+      }
+    }
+    @media (min-width: 769px) {
+      .nav {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        background: none;
+        box-shadow: none;
+      }
+      .menu-button {
+        display: none;
+      }
+    }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,6 +47,21 @@
 
 <body>
   <div class="page-wrapper">
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var menuBtn = document.querySelector('.menu-button');
+        var nav = document.querySelector('.nav');
+        menuBtn.addEventListener('click', function() {
+          nav.classList.toggle('open');
+        });
+        // Optional: close nav when clicking outside
+        document.addEventListener('click', function(e) {
+          if (!menuBtn.contains(e.target) && !nav.contains(e.target)) {
+            nav.classList.remove('open');
+          }
+        });
+      });
+    </script>
     <div class="header">
     <div class="header-content">
         <a href="index.html" class="logo">
@@ -26,9 +74,9 @@
             <a href="#services" class="nav-link">What we Serve</a>
             <a href="about.html" class="nav-link">About</a>
         </nav>
-        <a href="#contact" class="contact-content">
-            Get Started
-        </a>
+    <a href="signin.html" class="contact-content">
+      Get Started
+    </a>
         <button type="button" class="menu-button">
             <img src="./images/hamburger.svg" alt="menubutton" class="menu-icon">
         </button>

@@ -6,6 +6,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reloop</title>
     <link rel="stylesheet" href="style.css">
+       <style>
+           .nav-link {
+               transition: color 0.2s, background 0.2s;
+           }
+           .nav-link:hover {
+               color: #fff !important;
+               background: #16a34a !important;
+               border-radius: 0.5rem;
+           }
+           .menu-button {
+               transition: background 0.2s;
+               border-radius: 0.5rem;
+           }
+           @media (max-width: 768px) {
+               .menu-button:hover {
+                   background: #16a34a;
+               }
+           }
+           .menu-icon {
+               transition: filter 0.2s;
+           }
+           .menu-button:hover .menu-icon {
+               filter: brightness(0) invert(1);
+           }
+           /* Modal styles for mobile menu */
+           @media (max-width: 768px) {
+               .nav-modal-overlay {
+                   display: none;
+                   position: fixed;
+                   top: 0;
+                   left: 0;
+                   width: 100vw;
+                   height: 100vh;
+                   background: rgba(0,0,0,0.4);
+                   z-index: 999;
+                   justify-content: center;
+                   align-items: center;
+               }
+               .nav-modal-overlay.open {
+                   display: flex;
+               }
+               .nav {
+                   display: flex;
+                   flex-direction: column;
+                   background: #fff;
+                   box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+                   border-radius: 1.2rem;
+                   padding: 2.5rem 2rem;
+                   min-width: 80vw;
+                   max-width: 90vw;
+                   font-size: 1.3rem;
+                   align-items: center;
+                   position: static;
+               }
+               .nav-link {
+                   margin: 1rem 0;
+                   width: 100%;
+                   text-align: center;
+               }
+               .nav {
+                   box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+               }
+               .close-modal {
+                   position: absolute;
+                   top: 1.5rem;
+                   right: 2rem;
+                   background: none;
+                   border: none;
+                   font-size: 2rem;
+                   color: #16a34a;
+                   cursor: pointer;
+               }
+               .header-content {
+                   position: relative;
+                   z-index: 1;
+               }
+               .nav {
+                   z-index: 1000;
+               }
+               .menu-button {
+                   display: block;
+               }
+           }
+           @media (min-width: 769px) {
+               .nav-modal-overlay {
+                   display: none !important;
+               }
+               .nav {
+                   display: flex !important;
+                   position: static;
+                   flex-direction: row;
+                   background: none;
+                   box-shadow: none;
+                   border-radius: 0;
+                   padding: 0;
+                   min-width: auto;
+                   max-width: none;
+                   font-size: 1rem;
+               }
+               .nav-link {
+                   margin: 0 0.5rem;
+                   width: auto;
+                   text-align: left;
+               }
+               .close-modal {
+                   display: none;
+               }
+               .menu-button {
+                   display: none;
+               }
+           }
+       </style>
+           @media (max-width: 768px) {
+               .nav {
+                   display: none;
+                   position: absolute;
+                   top: 4rem;
+                   left: 0;
+                   width: 100%;
+                   background: #fff;
+                   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                   flex-direction: column;
+                   z-index: 100;
+               }
+               .nav.open {
+                   display: flex;
+               }
+               .menu-button {
+                   display: block;
+               }
+           }
+           @media (min-width: 769px) {
+               .nav {
+                   display: flex !important;
+                   position: static;
+                   flex-direction: row;
+                   background: none;
+                   box-shadow: none;
+               }
+               .menu-button {
+                   display: none;
+               }
+           }
+       </style>
 
 </head>
 
@@ -16,23 +160,55 @@
                 <img src="./images/plant (1).png" alt="" class="logo-icon" style="margin-bottom: 0.8rem;">
                 <span class="logo-text">Reloop</span>
             </a>
-
+            <a href="signin.html" class="contact-content">
+                Get Started
+            </a>
+            <button type="button" class="menu-button">
+                <img src="./images/burger-menu-svgrepo-com.svg" alt="menubutton" class="menu-icon">
+            </button>
+        </div>
+        <!-- Modal overlay for mobile nav -->
+        <div class="nav-modal-overlay">
+            <button class="close-modal" aria-label="Close">&times;</button>
             <nav class="nav">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#services" class="nav-link">What we Serve</a>
                 <a href="about.html" class="nav-link">About</a>
             </nav>
-
-            <a href="#contact" class="contact-content">
-                Get Started
-            </a>
-
-            <button type="button" class="menu-button">
-                <img src="./images/burger-menu-svgrepo-com.svg" alt="menubutton" class="menu-icon">
-            </button>
         </div>
     </div>
+       <script>
+           document.addEventListener('DOMContentLoaded', function() {
+               var menuBtn = document.querySelector('.menu-button');
+               var modal = document.querySelector('.nav-modal-overlay');
+               var closeBtn = document.querySelector('.close-modal');
+               // Open modal
+               menuBtn.addEventListener('click', function(e) {
+                   modal.classList.add('open');
+               });
+               // Close modal
+               closeBtn.addEventListener('click', function(e) {
+                   modal.classList.remove('open');
+               });
+               // Close modal when clicking outside nav
+               modal.addEventListener('click', function(e) {
+                   if (e.target === modal) {
+                       modal.classList.remove('open');
+                   }
+               });
+               // Prevent scroll when modal is open
+               const body = document.body;
+               const observer = new MutationObserver(function() {
+                   if (modal.classList.contains('open')) {
+                       body.style.overflow = 'hidden';
+                   } else {
+                       body.style.overflow = '';
+                   }
+               });
+               observer.observe(modal, { attributes: true });
+           });
+       </script>
 
     <div class="content" style="margin-top: 3rem;">
         <section class="main-section">
@@ -43,8 +219,8 @@
                 <p class="section-disc">Connect with local artisans to transform your discarded materials into unique, valuable products. Join India's circular economy movement.</p>
 
                 <div class="button-group">
-                    <a href="#start" class="start-button">Start Now</a>
-                    <a href="#tour" class="tour-button">Learn More</a>
+                    <a href="signin.html" class="start-button">Start Now</a>
+                    <a href="about.html" class="tour-button">Learn More</a>
                 </div>
             </div>
 
