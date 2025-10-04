@@ -86,14 +86,17 @@
                    z-index: 1000;
                }
                .menu-button {
-                   display: block;
+                   display: block !important;
+               }
+               .nav-desktop {
+                   display: none !important;
                }
            }
            @media (min-width: 769px) {
                .nav-modal-overlay {
                    display: none !important;
                }
-               .nav {
+               .nav-desktop {
                    display: flex !important;
                    position: static;
                    flex-direction: row;
@@ -114,41 +117,11 @@
                    display: none;
                }
                .menu-button {
-                   display: none;
+                   display: none !important;
                }
            }
        </style>
-           @media (max-width: 768px) {
-               .nav {
-                   display: none;
-                   position: absolute;
-                   top: 4rem;
-                   left: 0;
-                   width: 100%;
-                   background: #fff;
-                   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-                   flex-direction: column;
-                   z-index: 100;
-               }
-               .nav.open {
-                   display: flex;
-               }
-               .menu-button {
-                   display: block;
-               }
-           }
-           @media (min-width: 769px) {
-               .nav {
-                   display: flex !important;
-                   position: static;
-                   flex-direction: row;
-                   background: none;
-                   box-shadow: none;
-               }
-               .menu-button {
-                   display: none;
-               }
-           }
+           
        </style>
 
 </head>
@@ -160,6 +133,12 @@
                 <img src="./images/plant (1).png" alt="" class="logo-icon" style="margin-bottom: 0.8rem;">
                 <span class="logo-text">Reloop</span>
             </a>
+            <nav class="nav nav-desktop">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#howitworks" class="nav-link">What we Serve</a>
+                <a href="about.html" class="nav-link">About</a>
+            </nav>
             <a href="signin.html" class="contact-content">
                 Get Started
             </a>
@@ -173,7 +152,7 @@
             <nav class="nav">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#features" class="nav-link">Features</a>
-                <a href="#services" class="nav-link">What we Serve</a>
+                <a href="#howitworks" class="nav-link">What we Serve</a>
                 <a href="about.html" class="nav-link">About</a>
             </nav>
         </div>
@@ -232,7 +211,7 @@
         </section>
     </div>
 
-    <section class="how-it-works-section">
+    <section id="howitworks" class="how-it-works-section">
     <div class="container">
         <h2>How It Works</h2>
         <p class="subtitle">Three simple roles in our ecosystem</p>
@@ -265,7 +244,7 @@
     </div>
 `   </section>
 
-    <div class="feature-container"  style="margin-bottom: 5rem;">
+    <div id="advantage" class="feature-container"  style="margin-bottom: 5rem;">
         <div class="feature-content">
             <div class="main-info">
                 <h1 class="main-title">Our competitive advantage</h1>
